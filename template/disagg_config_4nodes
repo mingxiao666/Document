@@ -1,0 +1,28 @@
+hostname: 0.0.0.0
+port: 8000
+model: /workspace/DeepSeek-R1/models--deepseek-ai--DeepSeek-R1/
+free_gpu_memory_fraction: 0.2
+backend: "pytorch"
+use_cuda_graph: True
+context_servers:
+  num_instances: 1
+  tensor_parallel_size: 16
+  moe_expert_parallel_size: 8
+  pipeline_parallel_size: 1
+  max_batch_size: 1024
+#   kv_cache_config:
+#     free_gpu_memory_fraction: 0.2
+  enable_attention_dp: False
+  urls:
+      - "10.6.131.1:8005"
+generation_servers:
+  num_instances: 1
+  tensor_parallel_size: 16
+  moe_expert_parallel_size: 8
+  pipeline_parallel_size: 1
+  max_batch_size: 1024
+#   kv_cache_config:
+#     free_gpu_memory_fraction: 0.2
+  urls:
+      - "10.6.131.3:8005"
+  enable_attention_dp: False
