@@ -17,4 +17,4 @@ export NCCL_SOCKET_IFNAME=bond0
 export OMPI_MCA_btl=tcp,self
 export OMPI_MCA_btl_tcp_if_include=bond0
 export PMIX_MCA_psec=^munge
-export LD_LIBRARY_PATH=/usr/local/tensorrt/lib/:/opt/tritonserver/backends/tensorrtllm:/usr/local/tensorrt/lib:/usr/local/cuda/compat/lib:/tool/cublas/cuda-12.8/lib64
+#export LD_LIBRARY_PATH=/usr/local/tensorrt/lib/:/opt/tritonserver/backends/tensorrtllm:/usr/local/tensorrt/lib:/usr/local/cuda/compat/lib:/tool/cublas/cuda-12.8/lib64
