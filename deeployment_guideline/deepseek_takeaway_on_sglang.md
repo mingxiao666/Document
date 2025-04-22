@@ -65,7 +65,7 @@
     - Performance increment with small concurrency(<=64) only
 
 14. **flashinfer mla Limitations**
-    - Currently not always beneficial
+    - Currently(0.4.3) not always beneficial
     - Especially poor performance with large OSL
     - Reference: [Issue #3917](https://github.com/sgl-project/sglang/issues/3917)
 
