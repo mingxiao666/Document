@@ -18,7 +18,7 @@ python /workspace/torch_bench/TensorRT-LLM/benchmarks/cpp/prepare_dataset.py \
 }
 
 function run_benchmark() {
-echo -e "enable_attention_dp: false\npytorch_backend_config:\n  enable_overlap_scheduler: true\n  use_cuda_graph: true\n  cuda_graph_max_batch_size: 8" > /workspace/torch_bench/extra-llm-api-config_large_bs.yml
+echo -e "enable_attention_dp: false\npytorch_backend_config:\n  enable_overlap_scheduler: true\n  use_cuda_graph: true\n  cuda_graph_max_batch_size: 128" > /workspace/torch_bench/extra-llm-api-config_large_bs.yml
 
 #--model_path  /workspace/hub/models--deepseek-ai--DeepSeek-R1 \
 /usr/local/mpi/bin/mpirun -np 16  --hostfile /workspace/hostfile -mca plm_rsh_args "-p 12133" --verbose -display-map --allow-run-as-root trtllm-llmapi-launch trtllm-bench \
