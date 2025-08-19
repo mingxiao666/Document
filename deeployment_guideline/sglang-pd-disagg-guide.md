@@ -48,7 +48,7 @@ unzip attachment_ep_statistics.zip
 ## 3. P 节点（预填充节点）部署
 ### 3.1 部署说明
 - **节点规划**：`10.255.240.108`（预填充主节点）、`10.255.240.107`（预填充工作节点）
-- **参数逻辑**：`--max-running-requests 6144` = `--cuda-graph-max-bs 768` × 8（预填充 GPU 总数）
+- **参数逻辑**：`--max-running-requests 6144` = `--cuda-graph-max-bs 768` × 8（预填充 GPU 总数）, 如果要跑更长的ISL/OSL, 需要增加'--context-length'
 - **日志输出**：命令后台执行，日志写入对应文件（便于问题排查）
 
 ### 3.2 主节点（10.255.240.108）执行
@@ -156,7 +156,7 @@ python3 -m sglang.launch_server \
 ### 4.1 部署说明
 - **节点规划**：`10.255.240.109`（解码主节点）、`10.255.240.110`（解码工作节点）
 - **参数逻辑**：
-  - 2 节点场景：`--max-running-requests 6144` = `--cuda-graph-max-bs 768` × 4 × 2（解码器 GPU 总数）
+  - 2 节点场景：`--max-running-requests 6144` = `--cuda-graph-max-bs 768` × 4 × 2（解码器 GPU 总数），如果要跑更长的ISL/OSL, 需要增加'--context-length'
   - 12 节点场景（GB200）：`--max-running-requests 36864` = `--cuda-graph-max-bs 768` × 4 × 12
 
 ### 4.2 主节点（10.255.240.109）执行
