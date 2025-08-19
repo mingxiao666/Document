@@ -12,11 +12,13 @@ pip install nvidia-cudnn-cu12 nvidia-cudnn-frontend
 
 cd /root/.cache/huggingface/
 wget https://github.com/user-attachments/files/20036217/attachment_ep_statistics.zip
+unzip attachment_ep_statistics
 ```
 
 # P nodes
 - 假设使用 `10.255.240.108` 作为预填充主节点（prefill master node），`10.255.240.107` 作为预填充工作节点（prefill worker node）。
 - 将 `--cuda-graph-max-bs` 设置为 768，然后将 `--max-running-request` 设置为 6144；计算逻辑：6144 = 768 * 8，其中 8 是预填充 GPU 的总数。
+- deepep.json 见 https://github.com/ai-dynamo/dynamo/blob/4a11fb264b14dbaa67a872f24767828ed17db7e9/examples/sglang/configs/deepseek_r1/wideep/deepep.json
 
 ### 在 10.255.240.108 上执行：
 ```bash
