@@ -18,6 +18,7 @@ docker run -it  \
   lmsysorg/sglang:v0.4.10.post2-cu128-gb200  \
   bash 
 ```
+Notice: 当前版本支持NV-FP4的IFB mode, 不支持NVFP4的PD分离部署
 
 
 ## 2. 依赖与资源补丁（容器内执行）
