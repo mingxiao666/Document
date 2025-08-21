@@ -79,6 +79,10 @@ srun \
 echo "=== 等待150秒初始化 ==="
 sleep 150
 ```
+注意：也不一定要等150s, 只要你在/home/minih/start.log看到如下的log就可以进行下一步：
+```bash
+0: 2025-08-21T08:17:04.681034Z  INFO dynamo_llm::http::service::service_v2: Starting HTTP service on: 0.0.0.0:8000 address="0.0.0.0:8000"
+```
 
 ### 启动Prefill（头节点），假设是ptyche0336
 ```bash
