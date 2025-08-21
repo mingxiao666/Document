@@ -168,7 +168,7 @@ curl -w "%{http_code}" ${HOST}:${PORT}/v1/chat/completions \
 }'
 ```
 
-### Sglang bench
+### 3 Sglang bench
 #### 测试脚本
 ```python
 import os
