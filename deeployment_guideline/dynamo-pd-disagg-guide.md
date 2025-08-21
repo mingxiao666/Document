@@ -10,8 +10,8 @@
 4. SLURM资源：假设已预约含节点 `ptyche0336`、`ptyche0341` 2节点的资源
 
 
-## 二、步骤1：申请SLURM资源并配置调试环境
-### 1.1 申请8节点资源
+## 二、申请SLURM资源并配置调试环境
+### 申请8节点资源
 ```bash
 salloc \
   --partition="batch" \
@@ -20,7 +20,7 @@ salloc \
   --nodes 2
 ```
 
-## 三、步骤2：配置全局环境变量
+## 三、配置全局环境变量
 ```bash
 # 1. 容器与挂载
 export IMAGE="gitlab-master.nvidia.com/dl/ai-dynamo/dynamo:4cbd4f38810f152c81f15f1cc7cc600c354587aa-32804297-tensorrtllm-arm64"
@@ -60,8 +60,8 @@ fi
 ```
 
 
-## 四、步骤3：启动核心服务
-### 3.1 启动Frontend（头节点），假设是ptyche0336
+## 四、启动核心服务
+### 启动Frontend（头节点），假设是ptyche0336
 ```bash
 echo "=== 启动Frontend服务 ==="
 srun \
@@ -81,7 +81,7 @@ echo "=== 等待150秒初始化 ==="
 sleep 150
 ```
 
-### 3.2 启动Prefill（头节点），假设是ptyche0336
+### 启动Prefill（头节点），假设是ptyche0336
 ```bash
 echo -e "\n=== 启动Prefill节点 ==="
 DISAGGREGATION_MODE=prefill \
@@ -106,7 +106,7 @@ echo "=== 等待60秒初始化 ==="
 sleep 60
 ```
 
-### 3.3 启动Decode，假设是"ptyche0341"
+### 启动Decode，假设是"ptyche0341"
 ```bash
 echo -e "\n=== 启动Decode节点 ==="
 DISAGGREGATION_MODE=decode \
@@ -132,7 +132,7 @@ sleep 60
 ```
 
 
-## 五、步骤4：验证服务就绪
+## 五、验证服务就绪
 ```bash
 # 实时查看Frontend日志，等待模型加载成功标志
 tail -f /home/minih/start.log
@@ -163,12 +163,4 @@ curl -w "%{http_code}" ${HOST}:${PORT}/v1/chat/completions \
   "stream": true,
   "max_tokens": 30
 }'
-```
-**成功标志**：HTTP状态码200 + 终端实时输出故事内容。
-
-
-## 7、终止服务
-```bash
-scancel ${SLURM_JOB_ID}
-echo "已终止主任务 ${SLURM_JOB_ID} 及所有子任务"
 ```
