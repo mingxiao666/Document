@@ -11,7 +11,7 @@
 
 
 ## 二、申请SLURM资源并配置调试环境
-### 申请8节点资源
+### 申请2节点资源
 ```bash
 salloc \
   --partition="batch" \
