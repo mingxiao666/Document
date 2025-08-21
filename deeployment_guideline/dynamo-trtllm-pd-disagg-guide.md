@@ -143,15 +143,15 @@ tail -f /home/minih/start.log
 **就绪标志**：日志出现 `INFO dynamo_llm::discovery::watcher: added model model_name="hf-574fdb8-nim_fp4"`.
 
 
-## 六、步骤5：执行Benchmark测试
-### 6.1 配置Benchmark变量
+## 六、执行Benchmark测试
+### 1 配置Benchmark变量
 ```bash
 export SERVED_MODEL_NAME="hf-574fdb8-nim_fp4"
 export HOST=localhost
 export PORT=8000
 ```
 
-### 6.2 发送Chat请求
+### 2 发送Chat请求
 ```bash
 curl -w "%{http_code}" ${HOST}:${PORT}/v1/chat/completions \
   -H "Content-Type: application/json" \
