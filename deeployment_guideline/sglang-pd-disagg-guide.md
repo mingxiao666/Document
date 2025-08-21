@@ -299,7 +299,8 @@ python3 -m sglang.bench_one_batch_server \
 ### 6.3 恢复 D 节点速度（压测饱和后执行）
 > 等待约 10 分钟，确认 D 节点达到饱和状态后执行。
 ```bash
-curl -H "Content-Type:
+curl -H "Content-Type: application/json" -d '{"forward_sleep_time": null}' -X POST "http://10.255.240.111:30000/slow_down"
+```
 
 ## 7. bench 脚本
 ```python
