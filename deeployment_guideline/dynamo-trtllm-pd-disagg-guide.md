@@ -7,7 +7,6 @@
    - `multinode` 脚本（`start_frontend_services.sh`、`start_trtllm_worker.sh`）
    - 引擎配置（`/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill.yaml`、`/mnt/engine_configs/deepseek_r1/mtp/mtp_decode.yaml`）
 3. 模型路径：`/lustre/share/coreai_dlalgo_ci/artifacts/model/deepseek-r1_pyt/` 可访问
-4. SLURM资源：假设已预约含节点 `ptyche0336`、`ptyche0341` 2节点的资源
 
 
 ## 二、申请SLURM资源并配置调试环境
