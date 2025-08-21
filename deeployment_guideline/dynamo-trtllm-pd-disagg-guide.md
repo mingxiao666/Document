@@ -167,3 +167,69 @@ curl -w "%{http_code}" ${HOST}:${PORT}/v1/chat/completions \
   "max_tokens": 30
 }'
 ```
+
+### Sglang bench
+#### 测试脚本
+```python
+import os
+import subprocess
+import time
+import pickle
+import numpy as np
+import io,sys
+import requests
+
+
+def benchmark(num_prompt,ISL,OSL,max_concurrency,output_file):
+    test_cmd = [
+                'python3','-m','sglang.bench_serving','--backend','sglang-oai-chat',
+                '--dataset-name','random', '--model', 'hf-574fdb8-nim_fp4',
+                '--num-prompt',
+                f'{num_prompt}',
+                '--random-input',
+                f'{ISL}',
+                '--random-output',
+                f'{OSL}',
+                '--max-concurrency',
+                f'{max_concurrency}',
+                '--random-range-ratio','1.0', '--host', '0.0.0.0', '--port', '8000', '--output-file',f'{output_file}'
+                ]
+    subprocess.run(test_cmd,env=os.environ.copy())
+
+input_output = [
+    [4000,1000],
+]
+concurrencies = [1,2,4,8,16,32,64,128]
+
+n=0
+pid = -1
+skip = 0
+for ISL,OSL in input_output:
+    for concurrency in concurrencies:
+        num_requests = concurrency * 4
+        if n >= skip:
+            time.sleep(5)
+            with open('tmp-25k-nodp.4nodes.out','a') as fw:
+                fw.write(f'max_prefill:8192,max_running_requests:128,torch_compile:False,is_dp:False\n')
+            benchmark(num_requests,ISL,OSL,concurrency,'tmp-25k-nodp.4nodes.out')
+            print('finish 1 benchmark')
+        else:
+            print('skip')
+        n+=1
+
+```
+#### 关键注意事项
+1. **后端选择**  
+   必须使用 `sglang-oai-chat` 后端，而非 `sglang-oai`
+
+2. **本地模型命名与路径处理**  
+   - 若使用本地模型（如路径 `/deepseek-r1_pyt/safetensors_mode-instruct/hf-574fdb8-nim_fp4/`），需为其指定一个服务端定义的名称（例如 `hf-574fdb8-nim_fp4`）。  
+   - 由于该名称不符合 HuggingFace 官方模型路径格式，直接运行脚本会导致程序尝试从 HuggingFace 仓库下载，从而报错。
+
+3. **源码修改（跳过下载步骤）**  
+   为解决上述问题，需修改 SGLang 基准测试源码：  
+   - 源码路径：`/usr/local/lib/python3.12/dist-packages/sglang/bench_serving.py`  
+   - 操作：找到触发模型下载的代码段（可从报错日志中定位具体行数），直接跳过下载逻辑。  
+
+   修改后即可使用上述脚本正常运行基准测试。
+
