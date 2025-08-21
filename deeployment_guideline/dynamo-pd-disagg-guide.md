@@ -1,4 +1,4 @@
-# Dynamo+TRTLLM 单节点Prefill+单节点Decode部署与Benchmark指南
+# Dynamo+TRTLLM 部署指南
 
 
 ## 一、前提条件
