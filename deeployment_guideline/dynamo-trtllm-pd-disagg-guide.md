@@ -4,9 +4,9 @@
 ## 一、前提条件
 1. 容器镜像：`gitlab-master.nvidia.com/dl/ai-dynamo/dynamo:4cbd4f38810f152c81f15f1cc7cc600c354587aa-32804297-tensorrtllm-arm64`
 2. 本地目录 `/home/minih` 含：
-   - `multinode` 脚本（`start_frontend_services.sh`、`start_trtllm_worker.sh`）
-   - 引擎配置（`/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill.yaml`、`/mnt/engine_configs/deepseek_r1/mtp/mtp_decode.yaml`）
-3. 模型路径：`/lustre/share/coreai_dlalgo_ci/artifacts/model/deepseek-r1_pyt/` 可访问
+   - `multinode` 脚本（`start_frontend_services.sh`、`start_trtllm_worker.sh`）, 从这里获取：https://github.com/ai-dynamo/dynamo/blob/main/components/backends/trtllm/multinode/
+   - 引擎配置（`/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill.yaml`、`/mnt/engine_configs/deepseek_r1/mtp/mtp_decode.yaml`），从这里获取：https://github.com/ai-dynamo/dynamo/tree/main/components/backends/trtllm/engine_configs
+3. 模型路径：`/lustre/share/coreai_dlalgo_ci/artifacts/model/deepseek-r1_pyt/` 可访问，可自行下载https://huggingface.co/nvidia/DeepSeek-R1-FP4
 
 
 ## 二、申请SLURM资源并配置调试环境
