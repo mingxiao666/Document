@@ -16,7 +16,7 @@ salloc \
   --partition="36x2-a01r" \
   --account="general_sa" \
   --job-name="general_sa-dynamo.trtllm" \
-  --nodes 2
+  --nodes 4
 ```
 
 ## 三、配置全局环境变量
@@ -39,8 +39,8 @@ export ACCOUNT="general_sa"
 
 # 5. 资源配置
 export SLURM_JOB_ID="${SLURM_JOB_ID}"  # 使用salloc自动分配的Job ID
-export NUM_PREFILL_NODES=1
-export NUM_DECODE_NODES=1
+export NUM_PREFILL_NODES=2
+export NUM_DECODE_NODES=2
 export NUM_GPUS_PER_NODE=4
 
 # 6. 头节点与服务地址（自动获取）
@@ -108,6 +108,7 @@ srun \
 echo "=== 等待60秒初始化 ==="
 sleep 60
 ```
+注意：如果是多个Prefill节点，可以通过指定--nodelist 的方式提交这个命令给每个prefill节点，比如提交第一个prefill节点是--nodelist ptyche0336, 提交给第二个prefill节点是--node ptyche0337
 
 ### 启动Decode，假设是"ptyche0341"
 ```bash
@@ -133,7 +134,7 @@ srun \
 echo "=== 等待60秒初始化 ==="
 sleep 60
 ```
-
+注意：如果是多个decoderl节点，可以通过指定--nodelist 的方式提交这个命令给每个decoder节点，比如提交第一个decoder节点是--nodelist ptyche0336, 提交给第二个decoder节点是--node ptyche0337
 
 ## 五、验证服务就绪
 ```bash
