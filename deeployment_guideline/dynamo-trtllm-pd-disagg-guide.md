@@ -13,7 +13,7 @@
 ### 申请2节点资源
 ```bash
 salloc \
-  --partition="a01p" \
+  --partition="36x2-a01r" \
   --account="general_sa" \
   --job-name="general_sa-dynamo.trtllm" \
   --nodes 2
@@ -34,7 +34,7 @@ export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill.ya
 export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_decode.yaml"
 
 # 4. SLURM基础配置
-export PARTITION="a01p"
+export PARTITION="36x2-a01r"
 export ACCOUNT="general_sa"
 
 # 5. 资源配置
