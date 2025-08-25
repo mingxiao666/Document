@@ -228,8 +228,7 @@ for ISL,OSL in input_output:
 
 3. **源码修改（跳过下载步骤）**  
    为解决上述问题，需修改 SGLang 基准测试源码：  
-   - 源码路径：`/usr/local/lib/python3.12/dist-packages/sglang/bench_serving.py`  
-   - 操作：找到触发模型下载的代码段（可从报错日志中定位具体行数），直接跳过下载逻辑。  
+   - 源码路径：`/usr/local/lib/python3.12/dist-packages/sglang/bench_serving.py`L633, 把真实路径填写进去：pretrained_model_name_or_path = get_model("/deepseek-r1_pyt/safetensors_mode-instruct/hf-574fdb8-nim_fp4/")  
 
    修改后即可使用上述脚本正常运行基准测试。
 
