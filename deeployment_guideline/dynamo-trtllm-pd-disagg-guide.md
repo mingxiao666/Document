@@ -39,8 +39,6 @@ export ACCOUNT="general_sa"
 
 # 5. 资源配置
 export SLURM_JOB_ID="${SLURM_JOB_ID}"  # 使用salloc自动分配的Job ID
-export NUM_PREFILL_NODES=1
-export NUM_DECODE_NODES=1
 export NUM_GPUS_PER_NODE=4
 
 # 6. 头节点与服务地址（自动获取）
