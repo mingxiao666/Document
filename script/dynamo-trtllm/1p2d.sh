@@ -7,8 +7,8 @@ export MODEL_PATH="/deepseek-r1_pyt/safetensors_mode-instruct/hf-574fdb8-nim_fp4
 export SERVED_MODEL_NAME="hf-574fdb8-nim_fp4"
 
 # 3. 引擎配置
-export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill.yaml"
-export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_decode.yaml"
+export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill_nodp_1p2d.yaml"
+export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_decode_nodp_1p2d.yaml"
 
 # 4. SLURM基础配置
 export PARTITION="36x2-a01r"
