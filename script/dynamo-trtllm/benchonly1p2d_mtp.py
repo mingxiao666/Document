@@ -27,7 +27,7 @@ input_output = [
     [4000,1000],
     [6000,1000]
 ]
-concurrencies = [128,256,384,512]
+concurrencies = [1,2,4,8,16,32,64,128]
 
 n=0
 pid = -1
@@ -37,9 +37,9 @@ for ISL,OSL in input_output:
         num_requests = concurrency * 4
         if n >= skip:
             time.sleep(5)
-            with open('tmp-4k6k-dp.1p2d.out','a') as fw:
+            with open('tmp-4k6k-nodp-mtp.1p2d.out','a') as fw:
                 fw.write(f'max_prefill:8192,max_running_requests:128,torch_compile:False,is_dp:False\n')
-            benchmark(num_requests,ISL,OSL,concurrency,'tmp-4k6k-dp.1p2d.out')
+            benchmark(num_requests,ISL,OSL,concurrency,'tmp-4k6k-nodp-mtp.1p2d.out')
             print('finish 1 benchmark')
         else:
             print('skip')

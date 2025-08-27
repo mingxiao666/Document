@@ -7,14 +7,14 @@ export MODEL_PATH="/deepseek-r1_pyt/safetensors_mode-instruct/hf-574fdb8-nim_fp4
 export SERVED_MODEL_NAME="hf-574fdb8-nim_fp4"
 
 # 3. 引擎配置
-export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/simple/prefill_2p1d.yaml"
-export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/simple/decode_2p1d.yaml"
+export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill_nodp_2p2d.yaml"
+export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_decode_nodp_2p2d.yaml"
 
 # 4. SLURM基础配置
 export PARTITION="36x2-a01r"
 export ACCOUNT="general_sa"
-export PREFILL_NODES="ptyche0242,ptyche0243"
-export DECODE_NODE="ptyche0244"
+export PREFILL_NODES="ptyche0245,ptyche0246"
+export DECODE_NODES="ptyche0247,ptyche0248"
 # 5. 资源配置
 export SLURM_JOB_ID="${SLURM_JOB_ID}"  # 使用salloc自动分配的Job ID
 export NUM_GPUS_PER_NODE=4
@@ -45,7 +45,7 @@ srun \
   --nodelist "${HEAD_NODE}" \
   --nodes 1 \
   --jobid "${SLURM_JOB_ID}" \
-  /mnt/multinode/start_frontend_services.sh > /home/minih/start2p1d.log 2>&1 &
+  /mnt/multinode/start_frontend_services.sh > /home/minih/start2p2d.log 2>&1 &
 
 echo "=== 等待150秒初始化 ==="
 sleep 150
@@ -67,7 +67,7 @@ srun \
   --nodes 2 \
   --ntasks-per-node "${NUM_GPUS_PER_NODE}" \
   --jobid "${SLURM_JOB_ID}" \
-  /mnt/multinode/start_trtllm_worker.sh > /home/minih/preff-2p1d-p1.log 2>&1 &
+  /mnt/multinode/start_trtllm_worker.sh > /home/minih/preff-2p2d-p1.log 2>&1 &
 
 echo "=== 等待60秒初始化 ==="
 sleep 60
@@ -86,12 +86,15 @@ srun \
   --label \
   -A "${ACCOUNT}" \
   -J "general_sa-dynamo.trtllm-decode" \
-  --nodelist "${DECODE_NODE}" \
-  --nodes 1 \
+  --nodelist "${DECODE_NODES}" \
+  --nodes 2 \
   --ntasks-per-node "${NUM_GPUS_PER_NODE}" \
   --jobid "${SLURM_JOB_ID}" \
-  /mnt/multinode/start_trtllm_worker.sh > /home/minih/decoder-2p1d.log 2>&1 &
+  /mnt/multinode/start_trtllm_worker.sh > /home/minih/decoder-2p2d-d1.log 2>&1 &
 
 echo "=== 等待60秒初始化 ==="
 sleep 60
-tail -f /home/minih/start2p1d.log
+
+
+
+tail -f /home/minih/start2p2d.log

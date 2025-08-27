@@ -37,9 +37,9 @@ for ISL,OSL in input_output:
         num_requests = concurrency * 4
         if n >= skip:
             time.sleep(5)
-            with open('tmp-4k6k-dp.1p2d.out','a') as fw:
+            with open('tmp-4k6k-dp.2p2d.out','a') as fw:
                 fw.write(f'max_prefill:8192,max_running_requests:128,torch_compile:False,is_dp:False\n')
-            benchmark(num_requests,ISL,OSL,concurrency,'tmp-4k6k-dp.1p2d.out')
+            benchmark(num_requests,ISL,OSL,concurrency,'tmp-4k6k-dp.2p2d.out')
             print('finish 1 benchmark')
         else:
             print('skip')

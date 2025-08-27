@@ -7,14 +7,13 @@ export MODEL_PATH="/deepseek-r1_pyt/safetensors_mode-instruct/hf-574fdb8-nim_fp4
 export SERVED_MODEL_NAME="hf-574fdb8-nim_fp4"
 
 # 3. 引擎配置
-export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill_nodp_1p2d.yaml"
-export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_decode_nodp_1p2d.yaml"
+export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/simple/prefill_1p2d.yaml"
+export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/simple/decode_1p2d.yaml"
 
 # 4. SLURM基础配置
 export PARTITION="36x2-a01r"
 export ACCOUNT="general_sa"
-export DECODE_NODE1="ptyche0077"
-export DECODE_NODE2="ptyche0078"
+export DECODE_NODES="ptyche0147,ptyche0149"
 # 5. 资源配置
 export SLURM_JOB_ID="${SLURM_JOB_ID}"  # 使用salloc自动分配的Job ID
 export NUM_GPUS_PER_NODE=4
@@ -86,36 +85,13 @@ srun \
   --label \
   -A "${ACCOUNT}" \
   -J "general_sa-dynamo.trtllm-decode" \
-  --nodelist "${DECODE_NODE1}" \
-  --nodes 1 \
+  --nodelist "${DECODE_NODES}" \
+  --nodes 2 \
   --ntasks-per-node "${NUM_GPUS_PER_NODE}" \
   --jobid "${SLURM_JOB_ID}" \
   /mnt/multinode/start_trtllm_worker.sh > /home/minih/decoder-1p2d-d1.log 2>&1 &
 
 echo "=== 等待60秒初始化 ==="
 sleep 60
-
-echo -e "\n=== ~P~JDecode~J~B~B ==="
-DISAGGREGATION_MODE=decode \
-ENGINE_CONFIG="${DECODE_ENGINE_CONFIG}" \
-srun \
-  --mpi pmix \
-  --oversubscribe \
-  --container-image "${IMAGE}" \
-  --container-mounts "${MOUNTS}" \
-  --container-env "ETCD_ENDPOINTS=${ETCD_ENDPOINTS},NATS_SERVER=${NATS_SERVER},HEAD_NODE_IP=${HEAD_NODE_IP},HEAD_NODE=${HEAD_NODE},DISAGGREGATION_MODE=${DISAGGREGATION_MODE},DISAGGREGATION_STRATEGY=${DISAGGREGATION_STRATEGY},ENGINE_CONFIG=${ENGINE_CONFIG}" \
-  --verbose \
-  --label \
-  -A "${ACCOUNT}" \
-  -J "general_sa-dynamo.trtllm-decode" \
-  --nodelist "${DECODE_NODE2}" \
-  --nodes 1 \
-  --ntasks-per-node "${NUM_GPUS_PER_NODE}" \
-  --jobid "${SLURM_JOB_ID}" \
-  /mnt/multinode/start_trtllm_worker.sh > /home/minih/decoder-1p2d-d2.log 2>&1 &
-
-echo "=== ~I~E60~R~H~]~K~L~V ==="
-sleep 60
-
 
 tail -f /home/minih/start1p2d.log

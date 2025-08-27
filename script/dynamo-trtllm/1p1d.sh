@@ -7,13 +7,13 @@ export MODEL_PATH="/deepseek-r1_pyt/safetensors_mode-instruct/hf-574fdb8-nim_fp4
 export SERVED_MODEL_NAME="hf-574fdb8-nim_fp4"
 
 # 3. 引擎配置
-export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_prefill_nodp_1p1d.yaml"
-export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/mtp/mtp_decode_nodp_1p1d.yaml"
+export PREFILL_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/simple/prefill_1p1d.yaml"
+export DECODE_ENGINE_CONFIG="/mnt/engine_configs/deepseek_r1/simple/decode_1p1d.yaml"
 
 # 4. SLURM基础配置
 export PARTITION="36x2-a01r"
 export ACCOUNT="general_sa"
-export DECODE_NODE="ptyche0089"
+export DECODE_NODE="ptyche0072"
 
 # 5. 资源配置
 export SLURM_JOB_ID="${SLURM_JOB_ID}"  # 使用salloc自动分配的Job ID

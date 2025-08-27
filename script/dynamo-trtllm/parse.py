@@ -3,8 +3,8 @@ import json
 import math
 
 # 定义输入文件路径和输出 CSV 文件路径
-input_file_path ='tmp-4k6k-nodp.1p2d.out'
-output_file_path = 'tmp-4k6k-nodp.1p2d.out.csv'
+input_file_path ='tmp-4k6k-dp.1p1d.out'
+output_file_path = 'tmp-4k6k-dp.1p1d.out.csv'
 
 # 存储所有测试用例数据的列表
 all_cases = []

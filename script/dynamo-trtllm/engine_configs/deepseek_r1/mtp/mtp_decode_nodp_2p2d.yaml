@@ -20,7 +20,7 @@
 
 backend: pytorch
 tensor_parallel_size: 8
-moe_expert_parallel_size: 8
+moe_expert_parallel_size: 4
 enable_attention_dp: false
 max_batch_size: 256
 # Note: When MPT is enabled and `cuda_graph_batch_sizes` is specified, `max_num_tokens` must satisfy the following formula:

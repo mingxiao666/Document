@@ -12,34 +12,37 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# NOTE: FP4 only supported starting with Blackwell GPUs.
-# https://huggingface.co/nvidia/DeepSeek-R1-FP4
-# You can also specify the full path to locally downloaded weights
-# instead of a HuggingFace ID here.
-
 backend: pytorch
-tensor_parallel_size: 8
+
+# TP/EP/PP/DP
+tensor_parallel_size: 4
 moe_expert_parallel_size: 4
+pipeline_parallel_size: 1
 enable_attention_dp: false
-max_batch_size: 256
-# Note: When MPT is enabled and `cuda_graph_batch_sizes` is specified, `max_num_tokens` must satisfy the following formula:
-# max_num_tokens >= max(cuda_graph_batch_sizes) * (num_nextn_predict_layers + 1)
-# This is a known issue in TensorRT-LLM and will be resolved in the next release.
+
+max_batch_size: 512
 max_num_tokens: 512
-# 8704 = 8192 ISL + 512 OSL
-max_seq_len: 8704
+# 8448 = 8192 ISL + 256 OSL
+max_seq_len: 8448
+
 kv_cache_config:
+  # With dp attention disabled: high free_gpu_memory_fraction is fine.
   free_gpu_memory_fraction: 0.85
+  # With dp attention enabled: large ISL at high concurrency may need
+  # free_gpu_memory_fraction low to have enough available memory.
+  # free_gpu_memory_fraction: 0.30
   dtype: fp8
 
-# Enable the MTP(Multi-Token Prediction) in decode model engine
-speculative_config:
-  decoding_type: MTP
-  num_nextn_predict_layers: 1
+# NOTE: pytorch_backend_config section flattened since: https://github.com/NVIDIA/TensorRT-LLM/pull/4603
+# NOTE: overlap_scheduler enabled by default since this commit and changed
+# config field from 'enable_overlap_scheduler' to 'disable_overlap_scheduler':
+# https://github.com/NVIDIA/TensorRT-LLM/commit/b4e5df0ee0024eda3eeb83a6ba822245a30ab428
+disable_overlap_scheduler: false
 
 cuda_graph_config:
   enable_padding: true
+  # NOTE: For larger max batch size, you may want to
+  # add larger cuda graph batch sizes below to match.
   batch_sizes:
   - 1
   - 2
@@ -50,6 +53,8 @@ cuda_graph_config:
   - 64
   - 128
   - 256
+  - 384
+  - 512
 
 print_iter_log: true
 
