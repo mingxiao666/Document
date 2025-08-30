@@ -106,7 +106,6 @@ srun \
 echo "=== 等待60秒初始化 ==="
 sleep 60
 ```
-注意：如果是多个Prefill节点，可以通过指定--nodelist 的方式提交这个命令给每个prefill节点，比如提交第一个prefill节点是--nodelist ptyche0336, 提交给第二个prefill节点是--node ptyche0337
 
 ### 启动Decode，假设是"ptyche0341"
 ```bash
@@ -132,7 +131,6 @@ srun \
 echo "=== 等待60秒初始化 ==="
 sleep 60
 ```
-注意：如果是多个decoderl节点，可以通过指定--nodelist 的方式提交这个命令给每个decoder节点，比如提交第一个decoder节点是--nodelist ptyche0341, 提交给第二个decoder节点是--node ptyche0342
 
 ## 五、验证服务就绪
 ```bash
