@@ -1,4 +1,4 @@
-# Dynamo+TRTLLM on GB200 部署指南
+# Dynamo+TRTLLM部署指南(以GB200为例)
 
 
 ## 一、前提条件
