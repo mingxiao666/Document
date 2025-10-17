@@ -1,4 +1,4 @@
-# DeepSeek-R1 基于 SGLang 的部署与压测脚本
+# DeepSeek-R1 基于 SGLang 的部署与压测脚本， 以sglang:v0.4.10.post2-cu128-gb200为例
 
 ## 1. Docker 环境部署
 ```bash
