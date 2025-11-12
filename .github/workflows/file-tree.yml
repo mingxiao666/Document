@@ -1,0 +1,39 @@
+name: Generate File Structure
+on: 
+  push:
+    branches: [ main ]  # 替换为你的主分支（如 master）
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write  # 关键：授予推送权限
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install tree
+        run: sudo apt-get update && sudo apt-get install -y tree
+
+      - name: Generate FILE_STRUCTURE.md
+        run: |
+          # 生成带标题和格式的文件结构
+          echo "# Repository File Structure" > FILE_STRUCTURE.md
+          echo "" >> FILE_STRUCTURE.md
+          echo "\`\`\`" >> FILE_STRUCTURE.md
+          tree -I ".git|.github" -L 4 >> FILE_STRUCTURE.md  # 层级设为4层，覆盖所有文件
+          echo "\`\`\`" >> FILE_STRUCTURE.md
+          echo "" >> FILE_STRUCTURE.md
+          # 自动统计目录和文件数量
+          dir_count=$(tree -I ".git|.github" -L 4 | grep -oP '\d+(?= directories)' | head -1)
+          file_count=$(tree -I ".git|.github" -L 4 | grep -oP '\d+(?= files)' | head -1)
+          echo "Total: $dir_count directories, $file_count files" >> FILE_STRUCTURE.md
+
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto update file structure"
+          file_pattern: "FILE_STRUCTURE.md"
