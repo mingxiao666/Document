@@ -53,15 +53,21 @@
 │   │   └── serve.mtp.infer.sh
 │   ├── training-script-without-slrum
 │   │   ├── README.md
-│   │   └── script
-│   │       ├── check_all_nodes.sh
-│   │       ├── checker.sh
-│   │       ├── kill_docker.sh
-│   │       ├── launch_docker.sh
-│   │       ├── pull_docker.sh
-│   │       ├── run_llama405b_16nodes.sh
-│   │       ├── set_perf_mode.sh
-│   │       └── torch_allreduce_test.py
+│   │   ├── script
+│   │   │   ├── check_all_nodes.sh
+│   │   │   ├── checker.sh
+│   │   │   ├── kill_docker.sh
+│   │   │   ├── launch_docker.sh
+│   │   │   ├── pull_docker.sh
+│   │   │   ├── run_llama405b_16nodes.sh
+│   │   │   ├── set_perf_mode.sh
+│   │   │   └── torch_allreduce_test.py
+│   │   └── training-log
+│   │       ├── rack12-v2-group1-system-exit
+│   │       ├── rack12.check.17nodes.log
+│   │       ├── rack8-v2-group1-system-exit
+│   │       ├── rack8-v2-group2-manual-exit
+│   │       └── rack8.healthcheck.allnodes.log
 │   ├── trtllm-slrum
 │   │   ├── 1node.sh
 │   │   ├── 2nodes.sh
@@ -76,7 +82,7 @@
     ├── disagg_config_4nodes
     └── hostfile_4nodes
 
-12 directories, 62 files
+16 directories, 64 files
 ```
 
-Total: 12 directories, 62 files
+Total: 16 directories, 64 files
