@@ -51,6 +51,17 @@
 │   │   ├── parse_result_sglang_bench.py
 │   │   ├── serve.mtp.fa3.sh
 │   │   └── serve.mtp.infer.sh
+│   ├── training-script-without-slrum
+│   │   ├── README.md
+│   │   └── script
+│   │       ├── check_all_nodes.sh
+│   │       ├── checker.sh
+│   │       ├── kill_docker.sh
+│   │       ├── launch_docker.sh
+│   │       ├── pull_docker.sh
+│   │       ├── run_llama405b_16nodes.sh
+│   │       ├── set_perf_mode.sh
+│   │       └── torch_allreduce_test.py
 │   ├── trtllm-slrum
 │   │   ├── 1node.sh
 │   │   ├── 2nodes.sh
@@ -65,7 +76,7 @@
     ├── disagg_config_4nodes
     └── hostfile_4nodes
 
-10 directories, 53 files
+12 directories, 62 files
 ```
 
-Total: 10 directories, 53 files
+Total: 12 directories, 62 files
