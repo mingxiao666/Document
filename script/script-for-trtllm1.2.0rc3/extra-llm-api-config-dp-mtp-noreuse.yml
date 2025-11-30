@@ -1,0 +1,11 @@
+enable_attention_dp: true
+cuda_graph_config:
+  enable_padding: true
+  max_batch_size: 128
+kv_cache_config:
+  dtype: fp8
+  enable_block_reuse: false
+speculative_config:
+  decoding_type: MTP
+  num_nextn_predict_layers: 1
+
