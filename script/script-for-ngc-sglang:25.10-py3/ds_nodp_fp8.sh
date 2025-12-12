@@ -1,0 +1,13 @@
+python3 -m sglang.launch_server   --model /raid/models/DeepSeek-R1-0528/  \
+        --trust-remote-code     --host 0.0.0.0 --port 30000     \
+        --tp 4 --ep 4       \
+        --attention-backend flashinfer \
+        --moe-runner-backend auto \
+        --flashinfer-mla-disable-ragged     \
+        --max-running-requests 128 --cuda-graph-max-bs 128     \
+        --kv-cache-dtype fp8_e4m3     \
+        --stream-output     \
+        --mem-fraction-static 0.80     \
+        --disable-radix-cache     \
+        --max-prefill-tokens 8192 \
+        --chunked-prefill-size 8192 
