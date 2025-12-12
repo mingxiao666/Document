@@ -49,6 +49,7 @@
 │   │   ├── ds_dp_fp8.sh
 │   │   ├── ds_nodp.sh
 │   │   ├── ds_nodp_fp8.sh
+│   │   ├── ds_nodp_fp8_mtp.sh
 │   │   └── ds_nodp_mtp.sh
 │   ├── script-for-trtllm1.2.0rc3
 │   │   ├── ds-dp-mtp-noreuse-fp8.sh
@@ -102,7 +103,7 @@
     ├── disagg_config_4nodes
     └── hostfile_4nodes
 
-18 directories, 82 files
+18 directories, 83 files
 ```
 
-Total: 18 directories, 82 files
+Total: 18 directories, 83 files
