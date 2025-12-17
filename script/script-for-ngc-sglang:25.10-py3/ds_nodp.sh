@@ -2,8 +2,6 @@ SGLANG_USE_CUTLASS_BACKEND_FOR_FP4_GEMM=1 python3 -m sglang.launch_server   --mo
         --trust-remote-code     --host 0.0.0.0 --port 30000     \
         --tp 4 --ep 4       \
         --attention-backend flashinfer \
-        --moe-runner-backend auto \
-        --flashinfer-mla-disable-ragged     \
         --max-running-requests 128 --cuda-graph-max-bs 128     \
         --quantization modelopt_fp4 \
         --kv-cache-dtype fp8_e4m3     \
