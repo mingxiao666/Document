@@ -11,3 +11,4 @@ speculative_config:
   decoding_type: MTP
   num_nextn_predict_layers: 1
 
+# remove backend: DEEPGEMM if run on h200 for fp8
