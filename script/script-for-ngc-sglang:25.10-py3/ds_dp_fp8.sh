@@ -1,6 +1,6 @@
 python3 -m sglang.launch_server   --model /raid/models/DeepSeek-R1-0528/  \
         --trust-remote-code     --host 0.0.0.0 --port 30000     \
-        --tp 4 --ep 4       \
+        --tp 8 --ep 8       \
         --attention-backend flashinfer \
         --max-running-requests 128 --cuda-graph-max-bs 128     \
         --stream-output     \
