@@ -64,6 +64,7 @@
 │   │   ├── extra-llm-api-config-nodp-mtp-noreuse-fp8.yml
 │   │   ├── extra-llm-api-config-nodp-mtp-noreuse.yml
 │   │   ├── extra-llm-api-config-nodp.noreuse.yml
+│   │   ├── profiling-example.sh
 │   │   ├── qwen235-dp-noreuse.sh
 │   │   └── qwen235-nodp-noreuse.sh
 │   ├── sglang0.5.6.post2.parse.py
@@ -105,7 +106,7 @@
     ├── disagg_config_4nodes
     └── hostfile_4nodes
 
-18 directories, 85 files
+18 directories, 86 files
 ```
 
-Total: 18 directories, 85 files
+Total: 18 directories, 86 files
