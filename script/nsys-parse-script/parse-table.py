@@ -10,7 +10,7 @@ class NSysResultParser:
         # 使用defaultdict确保字段不存在时返回0.0，避免KeyError
         self.data = defaultdict(lambda: defaultdict(float))
         # 初始化核心模块默认值
-        core_modules = ["Communication", "GEMM", "Attention", "MoE", "Others", "Total"]
+        core_modules = ["Communication", "GEMM", "Attention", "Elementwise", "MoE", "Others", "Total"]
         for module in core_modules:
             self.data[module]["percent"] = 0.0
             self.data[module]["time_sec"] = 0.0
@@ -100,7 +100,7 @@ class NSysGeneralComparator:
             })
 
         # 核心模块数据
-        modules = ["Communication", "GEMM", "Attention", "MoE", "Others", "Total"]
+        modules = ["Communication", "GEMM", "Attention", "Elementwise", "MoE", "Others", "Total"]
         for module in modules:
             # 容错获取数据
             log1_p = self.log1_data[module].get("percent", 0.0)

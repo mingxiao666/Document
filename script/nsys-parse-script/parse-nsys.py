@@ -15,7 +15,7 @@ def parse_nsys_log(file_path):
         print(f"错误：读取文件时发生异常 - {e}")
         return
 
-    # === 1. 定义分类关键词（保持顺序：Communication→GEMM→Attention→MoE→Others）===
+    # === 1. 定义分类关键词（保持顺序：Communication→GEMM→Attention→Elementwise→MoE→Others）===
     categories = [
         ('Communication', ['ncclDevKernel_', 'ncclKernel', 'moe_comm']),
         ('GEMM', [
@@ -23,9 +23,11 @@ def parse_nsys_log(file_path):
             'cutlass::Kernel2',     # 6KD Cutlass GEMM 识别
             'cutlass::device_kernel',# 6KD Cutlass GEMM 识别
             'matMul', 'MatMul'      # 其他矩阵乘法命名
+            'nvjet'
         ]),
         ('Attention', ['flash_attention', 'mha', 'FlashInfer', 'attention', 'mla']),
         ('MoE', ['moe', 'Expert', 'finalizeMoe', 'expandInputRows', 'fused_moe']),
+        ('Elementwise',['elementwise']),
         ('Others', ['.*'])          # 兜底
     ]
 
@@ -124,6 +126,7 @@ def parse_nsys_log(file_path):
     comm_p = (totals['Communication'] / total_time_ns) * 100 if total_time_ns else 0.0
     gemm_p = (totals['GEMM'] / total_time_ns) * 100 if total_time_ns else 0.0
     attn_p = (totals['Attention'] / total_time_ns) * 100 if total_time_ns else 0.0
+    elem_p = (totals['Elementwise'] / total_time_ns) * 100 if total_time_ns else 0.0
     moe_p = (totals['MoE'] / total_time_ns) * 100 if total_time_ns else 0.0
     others_p = (totals['Others'] / total_time_ns) * 100 if total_time_ns else 0.0
     total_p = 100.0
@@ -131,6 +134,7 @@ def parse_nsys_log(file_path):
     comm_t = totals['Communication'] / 1e9
     gemm_t = totals['GEMM'] / 1e9
     attn_t = totals['Attention'] / 1e9
+    elem_t = totals['Elementwise'] / 1e9
     moe_t = totals['MoE'] / 1e9
     others_t = totals['Others'] / 1e9
     total_t = total_time_ns / 1e9
@@ -141,6 +145,7 @@ def parse_nsys_log(file_path):
     print(f"| {'Communication':<12} | {comm_p:>10.1f} | {comm_t:>8.3f} |")
     print(f"| {'GEMM':<12} | {gemm_p:>10.1f} | {gemm_t:>8.3f} |")
     print(f"| {'Attention':<12} | {attn_p:>10.1f} | {attn_t:>8.3f} |")
+    print(f"| {'Elementwise':<12} | {elem_p:>10.1f} | {elem_t:>8.3f} |")    
     print(f"| {'MoE':<12} | {moe_p:>10.1f} | {moe_t:>8.3f} |")
     print(f"| {'Others':<12} | {others_p:>10.1f} | {others_t:>8.3f} |")
     print(f"|{'-'*14}|{'-'*13}|{'-'*10}|")
