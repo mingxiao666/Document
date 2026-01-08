@@ -41,6 +41,10 @@
 │   │   └── parse.py
 │   ├── kill_sglang.sh
 │   ├── nccl.sh
+│   ├── nsys-parse-script
+│   │   ├── parse-nsys.py
+│   │   ├── parse-table.py
+│   │   └── readme.md
 │   ├── parse_result_sglang_bench.py
 │   ├── parse_result_trtllm_bench.py
 │   ├── parse_result_trtllm_bench_pd.py
@@ -106,7 +110,7 @@
     ├── disagg_config_4nodes
     └── hostfile_4nodes
 
-18 directories, 86 files
+19 directories, 89 files
 ```
 
-Total: 18 directories, 86 files
+Total: 19 directories, 89 files
