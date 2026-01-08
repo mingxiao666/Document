@@ -1,18 +1,20 @@
 ### Step 1: Verify Kernel Classification in `parse-nsys.py`
 First, confirm that the category configuration in `parse-nsys.py` matches your actual kernel naming rules (adjust keywords if needed):
 ```python
-categories = [
-    ('Communication', ['ncclDevKernel_', 'ncclKernel', 'moe_comm']),
-    ('GEMM', [
-        'gemm', 'Gemm',          # General GEMM keywords
-        'cutlass::Kernel2',     # 6KD Cutlass GEMM identification
-        'cutlass::device_kernel',# 6KD Cutlass GEMM identification
-        'matMul', 'MatMul'      # Other matrix multiplication naming
-    ]),
-    ('Attention', ['flash_attention', 'mha', 'FlashInfer', 'attention', 'mla']),
-    ('MoE', ['moe', 'Expert', 'finalizeMoe', 'expandInputRows', 'fused_moe']),
-    ('Others', ['.*'])          # Fallback for unclassified kernels
-]
+    categories = [
+        ('Communication', ['ncclDevKernel_', 'ncclKernel', 'moe_comm']),
+        ('GEMM', [
+            'gemm', 'Gemm',          # 通用 GEMM 关键词
+            'cutlass::Kernel2',     # 6KD Cutlass GEMM 识别
+            'cutlass::device_kernel',# 6KD Cutlass GEMM 识别
+            'matMul', 'MatMul'      # 其他矩阵乘法命名
+            'nvjet'
+        ]),
+        ('Attention', ['flash_attention', 'mha', 'FlashInfer', 'attention', 'mla']),
+        ('MoE', ['moe', 'Expert', 'finalizeMoe', 'expandInputRows', 'fused_moe']),
+        ('Elementwise',['elementwise']),
+        ('Others', ['.*'])          # 兜底
+    ]
 ```
 
 ### Step 2: Execute the Following Commands
