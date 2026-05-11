@@ -106,7 +106,7 @@
 │   ├── trtllm_bench_multinodes.sh
 │   ├── trtllm_bench_pd_multinodes.sh
 │   ├── trtllm_bench_singlenode.sh
-│   └── vllm_nsys_profiling_demo.md
+│   └── vllm_nsys_profiling_practice.md
 └── template
     ├── disagg_config_4nodes
     └── hostfile_4nodes
