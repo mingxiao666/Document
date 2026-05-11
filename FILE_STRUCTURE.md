@@ -105,12 +105,13 @@
 │   │   └── parse.py
 │   ├── trtllm_bench_multinodes.sh
 │   ├── trtllm_bench_pd_multinodes.sh
-│   └── trtllm_bench_singlenode.sh
+│   ├── trtllm_bench_singlenode.sh
+│   └── vllm_nsys_profiling_demo.md
 └── template
     ├── disagg_config_4nodes
     └── hostfile_4nodes
 
-19 directories, 89 files
+19 directories, 90 files
 ```
 
-Total: 19 directories, 89 files
+Total: 19 directories, 90 files
